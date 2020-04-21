@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        全选/全不选<input type="checkbox" v-model='select'><button>反选</button>
+        <ul>
+            <li v-for='item in list' :key='item.id'>
+                <input type="checkbox" v-model='item.flag'>
+                {{item.xm}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            computed:{
+                select:{
+                    get(){//遍历列表，有一个为false，就返回false，所有的都为true，才是返回真值
+                        return this.list.every((item)=>item.flag)
+
+                    },
+                    set(v){//v就是绑定标签传过来的值
+                        console.log(v);
+                        // this.list.forEach((item)=>item.flag=v)
+                        for(var i = 0;i<this.list.length;i++){
+                            this.list[i].flag = v;
+                        }
+                    }
+
+                }
+            },
+            data:{
+                showState:'all',//all全部 selected 选中的状态 u'nselected未选中的状态
+                list:[
+                    {
+                        id:1,
+                        "xm":'aaa',
+                        "flag":true
+                    },
+                    {
+                        id:2,
+                        "xm":'bbb',
+                        "flag":false
+                    },
+                    {
+                        id:3,
+                        "xm":'ccc',
+                        "flag":true
+                    }
+
+                ]
+            }
+        })
+        //[true,false,true].every((item)=>item) false
+    </script>
+</body>
+</html>
