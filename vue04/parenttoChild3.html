@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .progress{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- <CustomProgress>1111</CustomProgress>报错 -->
+        <!-- <custom-progress jd='80'></custom-progress>
+        <custom-progress jd='20'></custom-progress>
+        <custom-progress jd='50'></custom-progress>
+        <custom-progress jd='10'></custom-progress> -->
+        <custom-progress v-for="(item,index) in list" :jd='item' :key='index'></custom-progress>
+
+    </div>
+
+    <script>
+        var CustomProgress = {
+            // props:['jd'],
+            props:{
+                jd:{
+                    type:Number
+                }
+            },
+            template:`<div class='progress'>
+                    <div class='progress-bar' :style="{width:jd+'%'}"></div>
+                    </div>`
+        } 
+        new Vue({
+            el:'#box',
+            components:{
+                CustomProgress
+            },
+            data:{
+                list:[80,20,50,10]
+            }
+        })
+    </script>
+</body>
+</html>

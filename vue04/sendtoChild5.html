@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <div id="box">
+        <Counter :n="n"></Counter>
+    </div>
+    <script>
+        var Counter = {
+            // props:['n'],//子组件接受 简单 没有验证能力
+            props:{
+                n:{
+                    Number,
+                    // required:true,//这个值必须传
+                    // default:100 //默认值
+                    validator(v){//自定义验证条件
+                        return v>=0 && v<=150
+                    }
+                },
+
+
+            },
+            data(){
+                return {
+                    v:this.n//因为单向数据流，父组件传给子组件的值，赋值才能改
+                }
+            },
+            template:`<div>Counter {{v}} <button @click='inc'>+</button></div>`,
+            methods:{
+                inc(){
+                    this.v++
+                }
+            }
+        }
+        new Vue({
+            el:"#box",
+            components:{
+                Counter
+            },
+            data:{
+                n:1231
+            }
+        })
+    </script>
+</body>
+</html>

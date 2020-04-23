@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="box">
+        <com1></com1>
+        <two1></two1>
+    </div>
+    <hr/>
+    <div id="box2">
+        <two1></two1>
+    </div>
+    <script>
+        
+        var com = {
+            template:'<div>组件的内容</div>'
+        }
+        var two = {
+            template:'<div>two</div>'
+        }
+        new Vue({
+            el:'#box',
+            components:{
+                //注册组件用的
+                com1:com,
+                two1:two
+            }
+        })
+        new Vue({
+            el:'#box2',
+            components:{
+               two1:two
+            }
+        })
+
+
+
+
+    </script>
+</body>
+</html>

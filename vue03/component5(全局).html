@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 全局组件是在实例化之前创建的，Vue.component('组件名' ，{ template:`渲染的内容`} -->
+    <div id="box">
+        <One></One>
+
+    </div>
+    <hr/>
+    <div id="box2">` 
+        <One></One>
+    </div> 
+    <script>
+        //定义一个全局组件
+        // Vue.component('one',{
+        //     template:`<div>aaa</div>`
+        // })
+        Vue.component('one',{
+            template:`<div>aaabbb</div>`
+        })    
+        new Vue({
+            el:'#box'
+        })
+        new Vue({
+            el:'#box2'
+        })
+
+
+
+
+    </script>
+</body>
+</html>

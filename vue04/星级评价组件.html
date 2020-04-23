@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .star div{
+            display: inline-block;
+            width:25px;
+            height:25px;
+            background:url('img/star.png') no-repeat;
+            background-size:contain;
+        }
+
+        .star div.active{
+            background:url('img/star1.png') no-repeat;
+            background-size:contain;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <Star></Star>
+    </div>
+
+    <script>
+        //定义一个Star组件
+        var Star = {
+            template:`<div class="star">
+                <div v-for='n in 5' @mouseenter='enter(n)' :class="{'active':curIndex>=n}" @mouseleave='leave' @click='ok(n)'></div>
+                <p v-show='curIndex>0 & flag'>{{curIndex}}</p>
+            </div>`,
+            data(){
+                return{
+                    curIndex:-1,
+                    flag:false//用户是否点击过 点击过true，否则就是false
+                }
+            },
+            methods:{
+                //鼠标经过改变curIndex为当前的元素的n值
+                enter(n){
+                    if(!this.flag){//用户没有点击过
+                        this.curIndex = n;
+                    }
+                   
+                },
+                //鼠标离开，curIndex变为-1
+                leave(){
+                    if(!this.flag){
+                        this.curIndex=-1
+                    }
+                    
+                },
+                ok(n){
+
+                    this.curIndex = n
+                    this.flag = true
+                }
+            }
+        }
+        new Vue({
+            el:'#box',
+            components:{
+                Star
+            }
+        })
+    </script>
+</body>
+</html>

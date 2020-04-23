@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .delline{
+            text-decoration:line-through;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h3>待办事项</h3>
+        <input type="text" placeholder="今晚要做的事情" v-model.trim='str' @keyup.enter='add'>
+        <button @click='find'>查找</button>
+        <ul>
+            <li v-for='(item,index) in filterList' :key='item.id'>
+                <input type="checkbox" v-model='item.complete'>
+                <input type="text" v-if='curIndex===index' v-model='curContent' @keyup.enter='ok(index)' @keyup.esc='cancel'>
+                <span v-else :class="{'delline':item.complete}" @dblclick="edit(index)">
+                    {{item.content}}
+                </span>
+
+                <button @click='remove(item.id)'>删除</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#box',
+            computed:{
+                filterList(){
+                    return this.list.filter(item=>item.content.includes(this.kw))
+                }
+            },
+            data:{
+                kw:'',//存储的是要查找的关键词
+                str:'',//存储添加的内容
+                curContent:'',//存储当前正在编辑的内容
+                curIndex:-1,//存储当前正在编辑元素的下标
+                list:[]//存储的是待办事项列表
+                //每个列表项目里应该有ID，项目的内容content complete 是否完成
+            },
+            methods:{
+                //添加一个待办事项
+                add(){
+                    if(this.str === '') return;//如果为空，一定要不处理
+                    this.list.push({
+                        //push变异方法，既有数值以前的功能，同时又可以更新视图
+                        //数值类似的变异方法
+
+                        id:Date.now(),
+                        content:this.str,
+                        complete:false //默认是未完成状态
+                    })
+                    this.str = ''//清空文本框
+                    this.kw = ''//添加之后显示整个列表
+                },
+                find(){
+                    this.kw = this.str;//在用文本框的内容改变查找关键词
+                },
+                // remove(index){
+                //     //用下标删除
+                //     this.list.splice(index,1);
+                // }
+                remove(id){
+                    // var index = this.list.findIndex((item)=>item.id===id)
+                    // this.list.splice(index,1)
+                    //方法二
+                    this.list = this.list.filter((item)=>item.id!==id)
+                },
+                edit(index){
+                    //当前记录进入编辑状态
+                    this.curIndex = index;//改变curIndex
+                    this.curContent = this.list[index].content;//当前修改的内容放在文本框里
+                },
+                //按回车键确认修改
+                ok(index){
+                    this.list[index].content = this.curContent;//修改内容
+                    this.curIndex = -1//隐藏文本框
+                },
+                //按esc键恢复编辑器的内容
+                cancel(){
+                    this.curIndex=-1 //隐藏文本框
+                }
+            }
+        })
+    </script>
+</body>
+</html>

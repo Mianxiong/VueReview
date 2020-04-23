@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <h2>待办事项</h2>
+        <input type="text" placeholder="今晚要做的事情" @keyup.enter='add' v-model='str'>
+        <button @click='find'></button>
+        <ul>
+            <li v-for='(item,index) in list' :key='item.id'>
+                {{item.content}}<button @click='remove(item.id)'>删除</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                str:'',
+                list:[],
+                kw:''
+            },
+            methods:{
+                add(){
+                    this.list.push({
+                        id:Date.now(),
+                        content:this.str,
+                        flag:false
+                    })
+                },
+                remove(id){
+                    this.list = this.list.filter((item)=>item.id!==id)
+                },
+                find(){
+                    this.kw = this.str
+                },
+            }
+        })
+    </script>
+</body>
+</html>

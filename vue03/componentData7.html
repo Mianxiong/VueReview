@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{str}}
+        <com1>{{s}}</com1>
+    </div>
+    <script>
+        //定义组件
+        var com = {
+            template:`<div>
+                com {{s}} <p>{{n}} <button @click='inc'>+</button></p></div>`,
+            //为了保证每个组件的实例数据数据是独立的
+            data(){
+                return {
+                    s:'world'
+                }
+            }
+        }
+        new Vue({
+            el:'#box',
+            components:{//注册
+                com1:com
+            },
+            data:{
+                str:'dddd'
+            }
+        })
+    </script>
+</body>
+</html>

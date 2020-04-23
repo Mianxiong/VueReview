@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <div id="box">
+        
+        <One :n='a'></One>
+        <One :n='b'></One>
+        <One :n='10'></One>
+        <One :n='100'></One>
+    </div>
+    <script>
+        var One = {
+            props:['n'],//接收父组件传递过来的n值
+            data(){
+                return{
+                    v:this.n
+                }
+            },
+            template:`<div>one component {{v}}{{typeof n}}
+                <button @click='inc'>+</button>
+            </div>`,
+            methods:{
+                inc(){
+                    this.v++;//这样操作会有警告
+                }
+            }
+        }
+        new Vue({
+            el:'#box',
+            components:{
+                One
+            },
+            data:{
+                a:true,
+                b:7
+            }
+        })
+    </script>
+</body>
+</html>
