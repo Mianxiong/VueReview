@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{n}}<button v-on:click='add'>+</button>
+        <p v-bind:title='n'>aaa</p>
+        <!-- 遍历数组 -->
+        <ul>
+            <li v-for='(item,index) in arr' v-bind:key='item.id'>{{item.v}}</li>
+        </ul>
+        <!-- 遍历对象 -->
+        <ul>
+            <li v-for='(value,key,index) in obj' :key='key'>{{index}}{{key}}--{{value}}</li>
+        </ul>
+        <!-- 遍历数字 -->
+        <ul>
+            <li v-for='n in 100' :key='n'>{{n}}</li>
+        </ul>
+        <!-- 遍历字符串 -->
+        <span v-for='n in str'>{{n}}</span>
+        <div v-if='visible'>test</div>
+        <div v-show='visible'>test</div>
+        <button v-on:click='toggle'></button>
+    </div>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                visible:true,
+                str:'弱中强',
+                n:123,
+                arr:[
+                    {
+                        id:1,
+                        v:1
+                    },
+                    {
+                        id:2,
+                        v:2
+                    },
+                    {
+                        id:3,
+                        v:3
+                    }
+                ],
+                obj:{a:1,b:2,c:3}
+            },
+            methods:{
+                add(){
+                    this.n++
+                },
+                toggle(){
+                    this.visible = !this.visible
+                }
+            }
+        })
+    </script>
+</body>
+</html>
