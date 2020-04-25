@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .active{
+            color:red
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img v-bind:src="'img/'+name+'.jpeg'" width="100" alt="">
+        <button v-on:click='next'>next</button>
+        <ul>
+            <!-- <li v-for='(item,index) in arr' v-bind:key='item' v-bind:style="{'color':curIndex===index?'red':''}" v-on:click='change(index)'>
+                {{item}}
+            </li> -->
+            <li v-for='(item,index) in arr' v-bind:key='item' v-bind:class="{'active':index===curIndex}" v-on:click='change(index)'>{{item}}
+            </li>
+        </ul>
+    </div>  
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                name:3,
+                arr:['a','b','c','d'],
+                curIndex:0 // 当前项目的索引
+            },
+            methods:{
+                next(){
+                    //切换到下一张幻灯片
+                    this.name++;
+                    if(this.name===6){
+                        this.name=3
+                    }
+                },
+                change(index){
+                    //改变当前项目的索引
+                    this.curIndex = index;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

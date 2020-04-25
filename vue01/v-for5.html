@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <!-- key值是个固定唯一值比较好，提供给虚拟dom和diff算法比对时使用 -->
+            <!-- <li v-for='(item,index) in list' v-bind:key='item'>
+                <input type='checkbox'/>
+                {{index}}{{item}}
+            </li> -->
+
+            <!-- 不要在一个标签里同时用v-if v-for  v-for比v-if的级别高-->
+                <!-- <ul> <li v-for='item in fs' v-if='item>=60'>{{item}}</li> </ul>-->
+            <!-- 先将fs的数据进行处理，通过计算属性和filter方法 -->
+             <ul>
+                 <li v-for='item in jgfs'>{{item}}</li>
+             </ul>  
+           
+            
+        </ul>
+    </div>  
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                list:['aaa','bbb','ccc'],
+                fs:[50,60,70,80]
+            },
+            computed:{
+                //计算属性
+                jgfs(){
+                    //把及格的分数挑出来，存到jgfs计算属性里
+                    return this.fs.filter((item)=>item>=60)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

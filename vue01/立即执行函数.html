@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 立即执行函数的两种常见形式 -->
+    <!-- 匿名函数包裹在一个括号运算符中，后面跟一个小括号
+        (function(){
+            //...
+        })()
+        匿名函数后面跟一个小括号，整个包裹在一个括号运算符中
+        (function(){
+            //....
+        }())
+        (),!,+,-,=等运算符都能起到立即执行的作用，这些运算符的作用就是将匿名函数或函数声明转换为函数表达式
+        要注意两点，一是函数体后面要有小括号(),二是函数体必须是函数表达式而不能是函数声明
+
+    -->
+    <script>
+        (function (test){
+            console.log(test)//123
+        })(123);
+        (function (test){
+            console.log(test)
+        }(123));//123
+        !function (test){
+            //使用！运算符，输出123
+            console.log(test)
+        }(123);
+        var fn = function(test){
+            console.log(test)
+        }(123);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        data={
+            _a:2 //_a 表示私有的属性
+        }
+        //响应式数据
+        Object.defineProperty(data,'a',{
+            get(){
+                console.log('访问到a的值')
+                return this._a;
+            },
+            set(v){
+                console.log('data里的_a改变了,变为了'+v)
+                this._a=v;
+            }
+        })
+        data.a = '123'
+        console.log(data.a)
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <div v-on:click='increment'>
+            <button v-on:click.stop='increment'>+</button>
+            <button @click.stop='increment'>+</button>
+            <span>{{n}}</span>
+            <button v-on:click.stop='decrement'>-</button>
+            <button @click.stop='decrement'>-</button>
+            <a href="http://www.baidu.com" v-on:click.prevent='increment'>baidu</a>
+            <input type="text" v-on:keyup.esc='keyHandler'>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                str:'hello world',
+                n:1
+            },
+            methods:{
+                //存放事件处理函数
+                increment(){
+                    console.log(this===vm)
+                    this.n++
+                },
+                decrement(){
+                    //减少按键的处理-1
+                    this.n--
+                },
+                keyHandler(){
+                    // if(e.keyCode === 27){
+                    //     alert('按了esc键')
+                    // }
+                    alert('f1')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

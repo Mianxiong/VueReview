@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{a}}
+        <p>{{str}}</p>
+        <p v-bind:title='a'>hello</p>
+        <p :title='a'>hello</p>
+        <img v-bind:src="'img/'+url+'.jpeg'" width='100' alt="">
+        <img :src=`img/${url}.jpeg` width="100" alt="">
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                str:'hello',
+                a:123,
+                url:'3'
+            },
+            // template:"<div><div>hello</div><div>world</div></div>"
+        })
+    </script>
+</body>
+</html>
