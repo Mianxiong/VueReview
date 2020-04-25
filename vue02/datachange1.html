@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <span v-once>{{n}}</span>
+        <button @click='change'>+</button>
+        <p v-for='item in arr' :key='item'>{{item}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                n:1,
+                arr:[1,2,3]
+            },
+            methods:{
+                change(){
+                    // this.n++;//这个数据改变会触发视图的更新
+                    // this.arr[0] = 1111 //这种方式视图不触发更新
+
+                    // this.arr.splice(0,1,1111)//可以
+                    // console.log(this.arr)
+
+                    // this.$forceUpdate();
+                    
+                    // this.$set(this.arr,0,1111)//可以
+                    Vue.set(this.arr,0,2222)//可以
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li v-for='(item,index) in list' :key='item.id'>
+                <h2 v-on:click='toggle(index)'>{{item.title}}</h2>
+                <ul v-show='item.visible'>
+                    <li v-for="subItem in item.subList">{{subItem}}</li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                list:[
+                    {
+                        id:Date.now(),//事件戳保证key值的唯一
+                        title:'视频',
+                        subList:['我的视频','系统视频'],
+                        visible:true
+                    },
+                    {
+                        'id':Date.now()+1,
+                        'title':'文档',
+                        subList:['我的文档','系统文档'],
+                        visible:false
+                    }
+                ]
+            },
+            methods:{
+                toggle(index){
+                    //切换菜单的显示和隐藏
+                    this.list[index].visible=!this.list[index].visible
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -4,15 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <div>
+    <div id="box">
         <input type="checkbox" v-model="visible">
         <div v-show="visible">
             <input type="text" v-model.number.lazy="a">
-            <input type="text" v-model.number.lazy="b">
-            <input type="text" >
+            <input type="text" v-model.number.lazy="b">{{a+b}}
+            <input type="text" v-model.trim='str'>
+            <input type="text" v-model.trim='str2'>{{(str+str2).length}}{{str+str2}}
         </div>
+        <input v-model='val'>
     </div>
+    <script>
+        new Vue({
+            el:'#box',
+            computed:{
+                // val(){
+                //     return this.a*this.b;
+                // }
+                val:{
+                    // get:function(){
+                    //     return this.a*this.b;
+                    // },
+                    get(){
+                        return this.a*this.b;
+                    },
+                    set(v){
+                        console.log(v)
+                    }
+                }
+            },
+            data:{
+                str:'hello',
+                str2:'world',
+                a:1,
+                b:2,
+                visible:true    
+            }
+            
+        })
+    </script>
 </body>
 </html>

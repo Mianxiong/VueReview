@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        {{reverseStr}}
+        <button v-on:click='reverse'>反转</button>
+        {{n}}{{jg}}
+        <button @click='plus'>+</button>
+        <button @click='reduce'>-</button>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            computed: {
+                //计算属性
+                reverseStr() {
+                    return this.message.split('').reverse().join('')
+                },
+                jg(){
+                    return this.n>=60?'及格':'不及格'
+                }
+            },
+            data: {
+                message: 'Hello Vue!',
+                n: 58
+            },
+            methods: {
+                reverse() {
+                    // this.message = this.message.split('').reverse().join('');
+                    this.message = this.reverseStr;
+                },
+                plus() {
+                    this.n++; //n 加法
+                },
+                reduce() {
+                    this.n-- //n 减法
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

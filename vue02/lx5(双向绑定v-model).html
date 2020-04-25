@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-bind:value='n' >{{info}} -->
+        <input type="text" v-model='n' maxlength="20">{{info}} 
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            computed:{
+                info(){
+                    //20个字符以上的处理
+                    //方法一
+                    if(this.n.length<=20){
+                        //小于等于20个字符就显示可以输入多少个数字
+                        return `还可以输入${20-this.n.length}个字`
+
+                    }
+                    else{
+                        this.n = this.n.slice(0,20);//大于20个字符，截取20个字符
+                        return '还可以输入0个字'//显示还可以输入0个字符
+                    }
+                }
+            },
+            data:{
+                n:'abc'
+            }
+        })
+    </script>
+</body>
+</html>
