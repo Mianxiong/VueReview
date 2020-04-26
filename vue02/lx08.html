@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        全选/全不选<input type="checkbox" v-model="select"><button>反选</button>
+        <ul>
+            <li v-for='(item,index) in filterList' :key='item.id'>
+                <input type="checkbox" v-model='item.flag'>
+                {{item.xm}}
+            </li>
+        </ul>
+        {{showState}}
+        <button @click="change('all')">全部</button>
+        <button @click="change('selected')">选中的</button>
+        <button @click="change('unselected')">未被选中的</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#box',
+            computed: {
+                filterList() {
+                    //根据不同的showState的状态返回不同的列表
+                    return this.list.filter((item) => {
+                        if (this.showState === 'all') {
+                            return true; //返回整个列表
+                        } else if (this.showState === 'selected') {
+                            return item.flag //返回选中的项目
+                        } else {
+                            return !item.flag //返回未选中的项目
+                        }
+                    })
+                },
+                select: {
+                    get() {
+                        //遍历列表，有一个为false 就返回false，所有的都是true才是返回true
+                        return this.list.every((item) => item.flag)
+                    },
+                    set(v) {
+                        //v就是绑定标签传过来的值
+                        //console.log(v);
+                        this.list.forEach((item) => item.flag = v)
+
+                    }
+                },
+            },
+
+            methods: {
+                change(state) {
+                    this.showState = state
+                }
+            },
+            data: {
+                //data里的变量的名字不能和 computed里的名字一样
+                showState: 'all', //all 全部 selected选中的状态 unselected 未选中的状态
+                list: [{
+                        id: 1,
+                        xm: 'aaa',
+                        flag: true
+                    },
+                    {
+                        id: 2,
+                        xm: 'bba',
+                        flag: false
+                    },
+                    {
+                        id: 3,
+                        xm: 'ccc',
+                        flag: true
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
