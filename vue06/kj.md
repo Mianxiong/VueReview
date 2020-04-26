@@ -54,8 +54,8 @@ main.js 入口文件
     传值
     生命周期的钩子函数
     动态组件
-    插槽
-    
+    插槽(slot) <slot></slot>匿名插槽 <slot name='插槽名'></slot> 具名插槽
+    <组件><tag slot="插槽的名字"></tag></组件>
     https://blog.csdn.net/wxl1555/article/details/83187647
 
 12.以前 局部组件的组件的声明
@@ -64,4 +64,18 @@ var Demo = {
 }
 解决方案
     配置项目 在项目的根目录下建立一个vue.config.js
-    
+
+13.v-slot  v-slot:插槽的名字
+    v-slot:插槽 = "子组件通过插槽传过来的数据"
+    <slot :属性="变量"></slot>
+14.SPA单页面应用
+
+15.用rap2写一个接口，然后在
+http://rap2.taobao.org:38080/app/mock/226329/api/goods
+http://rap2.taobao.org:38080/app/mock/226329/api/users
+用一个组件渲染两个列表
+
+16.axios
+npm i axios --save
+
+
