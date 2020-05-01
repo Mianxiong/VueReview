@@ -8,19 +8,29 @@ import Demo from '@/views/Demo'
 import Phone from '@/views/Phone'
 import Tool from '@/views/Tool'
 import NotFound from '@/views/NotFound'
+import List from '@/views/List'
 Vue.use(VueRouter)
 
 const routes = [{
-    path: '/',
-    // redirect:'/home'
-    redirect: {
-      name: 'Home1'
+    // path: '/',
+    // // redirect:'/home'
+    // redirect: {
+    //   name: 'Home1'
+    // }
+    path:'/',
+    // redirect:'/home',
+    redirect:{
+      name:'Home1'
     }
   },
   {
-    //命名路由
+    path:'/list/:type',//type相当于路由的参数，是形参
+    component:List
+  },
+  {
+    //有名字 命名路由
     path: '/Home',
-    alias:'/h',
+    alias:'/h',//别名
     name: 'Home1',
     component: Home,
 
@@ -35,8 +45,8 @@ const routes = [{
   {
     path: '/category',
     components:{//同一个路径可以渲染多个组件
-      default:Category,
-      demo:Demo,
+      default:Category,//没有名字的那个router-view 渲染 Category
+      demo:Demo,//name 是demo router-view 渲染Demo组件
       
     },
     redirect:{'name':'phone'},
@@ -66,7 +76,10 @@ const routes = [{
     component: Shopping
   },{
     path:'**',
-    component:NotFound
+    component:NotFound,
+    meta:{//路由的元数据
+      flag:true
+    }
   }
 ]
 

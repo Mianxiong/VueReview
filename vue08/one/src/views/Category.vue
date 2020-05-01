@@ -16,19 +16,19 @@
 export default {};
 </script>
 <style lang='scss'>
-    .category{
+    #category{
         display: flex;
         position:fixed;
         top:0;
         right: 0;
         left:0;
-        bottom:0;
+        bottom:1.2rem;
         .nav{
             width:2rem;
         }
         .categoryList{
             flex:1;
-            background:#eee
+            background:#666
         }
     }
 </style>
