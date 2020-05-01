@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <router-link to='/list/users'>users</router-link>
-      <router-link to='/list/goods'>goods</router-link>
+    <!-- <router-link to='/list/users'>users</router-link>
+      <router-link to='/list/goods'>goods</router-link> -->
+    <button @click="changeList('users')">users</button>
+    <button @click="changeList('goods')">goods</button>
     <router-view/>
     <!-- <router-view name='demo'></router-view> -->
     <ul class="footer" v-show='visible'>
@@ -34,6 +36,17 @@
           this.visible = !n.meta.flag//flag是true的时候，导航不可见 undefined(false) 可见
         },
         immediate:true//立即监控
+      }
+    },
+    methods:{
+      changeList(type){
+        //编程式导航  //this.$router this.route
+        console.log(this.$router)
+        // this.$router.push('/list/'+type)//改变url /list/users /list/goods
+        this.$router.push({"name":"list",params:{type},query:{k:Date.now()}})//这种方式
+        //路由跳转到 name叫 list的路由对象,params 参数传递过去，方便传多个值 
+        //对应的路由的path /list
+        //push({name:xxx,params:{...}}) 不能用path 替换name
       }
     }
   }

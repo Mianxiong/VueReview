@@ -20,6 +20,8 @@ export default {
     watch:{//监听路由参数的变化 在组件没有卸载的情况下
         $route:{
             handler(n){//n相当于this.$route
+            console.log(n.params)
+            console.log(n.query)
                 getList(n.params.type).then((res)=>{
                     if(res.data.code === 200){
                         this.list = res.data.data.list;

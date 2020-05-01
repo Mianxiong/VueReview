@@ -99,4 +99,25 @@ watch:{
         },  
     }
 
+5.$router,$route
+this.$router VueRouter的实例对象 编程式导航
+this.$route 当前的路由对象 
+
+6.编程式导航
+this.$router.push('url') 它能够改变地址栏上的url，从而改变渲染的组件
+this.$router.push({name:route对象的name,params:{key:value...}}) 对应同一个路由path /list 重复点击会报警告 
+
+ methods:{
+      changeList(type){
+        //编程式导航  //this.$router this.route
+        console.log(this.$router)
+        // this.$router.push('/list/'+type)//改变url /list/users /list/goods
+        this.$router.push({"name":"list",params:{type},query:{k:Date.now()}})//这种方式
+        //路由跳转到 name叫 list的路由对象,params 参数传递过去，方便传多个值 
+        //对应的路由的path /list
+      }
+    }
+
+7.拿到query 传的值
+this.$route.query.变量
 

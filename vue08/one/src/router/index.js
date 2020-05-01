@@ -23,8 +23,13 @@ const routes = [{
       name:'Home1'
     }
   },
+  // {
+  //   path:'/list/:type',//type相当于路由的参数，是形参
+  //   component:List
+  // },
   {
-    path:'/list/:type',//type相当于路由的参数，是形参
+    path:'/list',
+    name:'list',
     component:List
   },
   {
