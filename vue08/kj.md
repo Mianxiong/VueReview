@@ -105,7 +105,7 @@ this.$route 当前的路由对象
 
 6.编程式导航
 this.$router.push('url') 它能够改变地址栏上的url，从而改变渲染的组件
-this.$router.push({name:route对象的name,params:{key:value...}}) 对应同一个路由path /list 重复点击会报警告 
+this.$router.push({name:route对象的name,params:{key:value...},,query:{k:Date.now()}}) 对应同一个路由path /list 重复点击会报警告 
 
  methods:{
       changeList(type){
@@ -117,7 +117,50 @@ this.$router.push({name:route对象的name,params:{key:value...}}) 对应同一�
         //对应的路由的path /list
       }
     }
-
+---------------------------------
+this.$rouer.push({name:"xxx",params:{key:value...},query:{key:value...}})
+跳转到名字叫 xxx路由对象，带过去params对象里的参数，并且把query里的键值对放到？后面
+--------------------------------------
 7.拿到query 传的值
 this.$route.query.变量
+
+8.html5有一个pushState方法 replaceState方法
+
+9.transition 
+v-enter
+v-enter-active
+v-enter-to
+
+v-leave
+v-leave-active
+v-leave-to
+
+<transition mode = 'out-in'>out-in 是表示先退场再进场
+    <router-view/>
+</transition>
+
+animate.css
+
+<link href="https://cdn.bootcdn.net/ajax/libs/animate.css/3.7.2/animate.css" rel="stylesheet">
+ <transition mode="out-in" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+    <router-view/>
+    </transition>
+
+10.导航守卫 路由的钩子函数
+    全局守卫 
+        beforeEach(to,from,next) to 就是切换到路由的对象 from 当前路由的对象 next跳转
+        afterEach(to,from)
+    路由独享的守卫
+        beforeEnter
+    组件内的守卫
+        路由进入之前
+        beforeRouterEnter(比beforeCreate要早，直接拿不到数据)
+        路由更新之前
+        beforeRouteUpdate
+        路由离开之前
+        beforeRouteLeave
+
+
+
+
 

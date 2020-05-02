@@ -28,8 +28,9 @@ const routes = [{
   //   component:List
   // },
   {
-    path:'/list',
-    name:'list',
+    path:'/list',//传多个参数的时候，不在这里写参数变量
+    name:'list',//一定要有name 因为name和params搭配使用
+                //this.$router.push({name:"list",params:{....}})
     component:List
   },
   {
@@ -78,6 +79,16 @@ const routes = [{
   },
   {
     path: '/shopping',
+    beforeEnter(to,from,next){
+      console.log(to,from,next);
+      if(prompt('输入密码')==='admin'){
+        next()
+      }
+      else{
+        next(false);
+      }
+      
+    },
     component: Shopping
   },{
     path:'**',

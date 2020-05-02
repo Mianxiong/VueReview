@@ -4,7 +4,9 @@
       <router-link to='/list/goods'>goods</router-link> -->
     <button @click="changeList('users')">users</button>
     <button @click="changeList('goods')">goods</button>
+    <transition mode="out-in" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
     <router-view/>
+    </transition>
     <!-- <router-view name='demo'></router-view> -->
     <ul class="footer" v-show='visible'>
       <li>
@@ -29,6 +31,16 @@
         visible:true
       }
     },
+    created(){
+
+      //任何一个 路由切换的时候都会执行这个函数
+      this.changeTitle(this.$route.path) //刷新时重新渲染组件，执行created
+      this.$router.beforeEach((to,from,next)=>{
+        console.log(to,from,next)
+        this.changeTitle(to.path)
+        next()
+      })
+    },
     watch:{
       $route:{//监听当前路由的变化
         handler(n){//n 相当于this.$route
@@ -47,6 +59,18 @@
         //路由跳转到 name叫 list的路由对象,params 参数传递过去，方便传多个值 
         //对应的路由的path /list
         //push({name:xxx,params:{...}}) 不能用path 替换name
+      },
+       //根据切换到的路由(to.path)改变标题栏中的标题
+      changeTitle(path){
+        // console.log(path)
+        switch(path){
+          case '/Home':document.title='首页';break;
+          case '/category/phone':
+          case '/category/tool':document.title='分类';break;
+          case '/shopping':document.title='购物车';break;
+          case '/user':document.title='用户';break;
+          default:
+        }
       }
     }
   }
@@ -93,4 +117,17 @@ $bgcolor:#fff;
   background:red;
   // color:red
 }
+
+// .v-enter{
+//   transform: translateX(-100%);
+// }
+// .v-enter-active,v-leave-active{
+//   transition:all 300ms;
+// }
+// .v-enter-to{
+//   transform:translateX(0%)
+// }
+// .v-leave-to{
+//   transform:translateX(100%)
+// }
 </style>
