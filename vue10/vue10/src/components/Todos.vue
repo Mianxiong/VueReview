@@ -33,7 +33,9 @@ export default {
             return this.$store.getters.getTodosFinish;
         },
         set(v){
-            this.changeAll(v)
+            //调用mutations里的方法，修改所有task的finish状态
+            // this.changeAll(v)
+             this.$store.commit('changeAll',v);
         }
         
     }

@@ -30,8 +30,10 @@ export default new Vuex.Store({
     },
     changeAll(state,flag){
       state.todos.forEach(item => {
-          item.finish = flag
+          item.finish = flag;
+          
       });
+      sessionStorage.setItem('todos',JSON.stringify(state.todos))//存储到本地
     },
     changeGoodsList(state,list){
       //list请求回来的数据列表
