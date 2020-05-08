@@ -148,5 +148,9 @@ npm run build dist 传到服务器上
  watch监控路由变化
 
 
+ 1.vant axios的二次封装
+ 2.上拉加载数据 vant-list
+
+
 
 
