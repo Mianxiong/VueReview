@@ -1,10 +1,10 @@
 <template>
-    <div class="area">
+    <div class="area" ref="area_scroll" v-if="cityInfo">
         <div class="scroll_wrap">
             <!-- 热门城市 -->
             <div class="hot_wrap" >
                 <div class="title">热门城市</div>
-                <ul class="hot_city" v-if="cityInfo">
+                <ul class="hot_city" >
                     <li v-for="(item,index) in cityInfo.hotCities" :key="index">{{item.name}}</li>
                 </ul>
             </div>
@@ -23,16 +23,38 @@
                 
             </div>
         </div>
+        <div class="area_keys">
+            <ul>
+                <li @click="selectKey(0)">#</li>
+                <li @click="selectKey(index+1)" v-for="(item,index) in keys" :key="index">{{item}}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
+import BScroll from 'better-scroll'
 export default {
     name:"Alphabet",
+    data(){
+        return{
+            scroll:null
+        }
+    },
     props:{
         cityInfo:Object,
         keys:Array
     },
+    methods:{
+        initScroll(){
+            this.scroll = new BScroll(this.$refs.area_scroll,{
+                click:true
+            })
+        },
+        selectKey(index){
+            console.log(index)
+        }
+    }
 }
 </script>
 
@@ -73,6 +95,14 @@ export default {
     border-bottom:1px solid #eee;
 }
 .area_keys{
-    
+    position:fixed;
+    right:0;
+    top:25%;
+    color:#aaa;
+    font-size:12px;
+    line-height:1.4;
+    text-align:center;
+    padding:0 5px;
 }
+
 </style>
