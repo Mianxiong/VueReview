@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="address_map">
+      <!-- <div class="address_map" @click="$router.push('/address')"> -->
+      <div class="address_map" @click="$router.push({name:'address',params:{city:city}})">
         <i class="fa fa-map-marker"></i>
         <span>{{address}}</span>
         <i class="fa fa-sort-desc"></i>
@@ -20,6 +21,9 @@ export default {
     computed:{
       address(){
         return this.$store.getters.address;
+      },
+      city(){
+        return this.$store.getters.location.addressComponent.city || this.$store.getters.location.addressComponent.province;
       }
     }
 }
