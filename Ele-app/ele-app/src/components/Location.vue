@@ -20,6 +20,7 @@ export default {
 <style scoped>
 .title{
     margin:10px 0;
+    font-size:12px;
 }
 .des i{
     color:#009eef;

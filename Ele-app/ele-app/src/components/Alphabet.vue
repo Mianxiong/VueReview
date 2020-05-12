@@ -23,12 +23,12 @@
                 
             </div>
         </div>
-        <div class="area_keys">
+        <!-- <div class="area_keys">
             <ul>
                 <li @click="selectKey(0)">#</li>
                 <li @click="selectKey(index+1)" v-for="(item,index) in keys" :key="index">{{item}}</li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -46,11 +46,11 @@ export default {
         keys:Array
     },
     methods:{
-        initScroll(){
-            this.scroll = new BScroll(this.$refs.area_scroll,{
-                click:true
-            })
-        },
+       initScroll(){
+           this.scroll = new BScroll(this.$refs.area_scroll,{
+               click:true
+           })
+       },
         selectKey(index){
             console.log(index)
         }
@@ -64,8 +64,8 @@ export default {
     box-sizing:border-box;
     padding:0 16px;
     background:#fff;
-    height:calc(100%-65px);
-    overflow:hidden
+    height:calc(100% - 65px);
+    overflow:hidden;
 }
 .scroll_wrap{
     background:#fff;
