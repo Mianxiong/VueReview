@@ -12,7 +12,7 @@
         搜索商家 商家名称
       </div> -->
     </div>
-    <div class="search_wrap">
+    <div class="search_wrap" :class="{'fixedview':showFilter}">
       <div class="shop_search">
         <i class="fa fa-search"></i>
         搜索商家 商家名称
@@ -44,17 +44,35 @@
     <div class="shoplist-title">
       推荐商家
     </div>
+    <!-- 导航 -->
+    <FilterView :filterData="filterData" @searchFixed="showFilterView" @update="update"/>
+
+    <!-- 商家信息 -->
+    <div class="shoplist">
+      <IndexShop v-for="(item,index) in restaurants" :key="index" :restaurant = 'item.restaurant'/>
+    </div>
   </div>
 </template>
 
 <script>
+import FilterView from '../components/FilterView'
+import IndexShop from '../components/IndexShop'
 export default {
     name:'home',
     data(){
       return {
         swipeImgs:[],
-        entries:[]
+        entries:[],
+        filterData:null,
+        showFilter:false,
+        page:1,
+        size:5,
+        restaurants:[]//存放所有商家容器
       }
+    },
+    components:{
+      FilterView,
+      IndexShop
     },
     computed:{
       address(){
@@ -73,7 +91,22 @@ export default {
           console.log(res.data)
           this.swipeImgs = res.data.swipeImgs;
           this.entries = res.data.entries
+        });
+        this.$axios('/api/profile/filter').then(res=>{
+          console.log(res.data)
+          this.filterData = res.data;
+        });
+        //拉取商家信息
+        this.$axios.post(`/api/profile/restaurants/1/5`).then(res=>{
+          // console.log(res.data)
+          this.restaurants = res.data;
         })
+      },
+      showFilterView(isShow){
+        this.showFilter = isShow;
+      },
+      update(condition){
+        console.log(condition)
       }
     }
 }
@@ -182,5 +215,10 @@ export default {
 .shoplist-title:after{
   margin-left:3.466667vw;
 }
-
+.fixedview{
+  width:100%;
+  position:fixed;
+  top:0px;
+  z-index:999;
+}
 </style>
